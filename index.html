@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Northeast Circuit · Summer 1776→2026</title>
+<meta name="description" content="A nine-day road trip through six college towns and the cradle of American independence, during the nation's 250th anniversary.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --parchment:#f1e9d6;
+    --parchment-deep:#e7dcc2;
+    --ink:#23201a;
+    --ink-soft:#4a4438;
+    --oxblood:#7c2d23;
+    --oxblood-bright:#9c3a2c;
+    --indigo:#2b3a4f;
+    --gold:#a6822e;
+    --rule:#c4b89a;
+    --shadow:rgba(35,32,26,.16);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--parchment);
+    color:var(--ink);
+    font-family:'Spectral',Georgia,serif;
+    font-weight:400;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  body::before{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:1;
+    background:
+      radial-gradient(ellipse at 20% 10%, rgba(124,45,35,.04), transparent 55%),
+      radial-gradient(ellipse at 85% 90%, rgba(43,58,79,.05), transparent 55%);
+    mix-blend-mode:multiply;
+  }
+  .wrap{max-width:1060px;margin:0 auto;padding:0 28px;position:relative;z-index:2}
+
+  /* ---------- Hero ---------- */
+  .hero{padding:72px 0 38px;border-bottom:2px solid var(--ink);position:relative}
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.32em;
+    text-transform:uppercase;color:var(--oxblood);margin-bottom:22px;
+    display:flex;gap:14px;align-items:center;flex-wrap:wrap;
+  }
+  .eyebrow::before{content:"";width:38px;height:1px;background:var(--oxblood)}
+  h1{
+    font-family:'Cormorant Garamond',serif;font-weight:600;
+    font-size:clamp(2.9rem,8vw,6rem);line-height:.96;letter-spacing:-.01em;
+    margin-bottom:6px;
+  }
+  h1 .sub{display:block;font-style:italic;font-weight:500;color:var(--oxblood);
+    font-size:clamp(1.4rem,3.6vw,2.4rem);margin-top:10px;letter-spacing:0}
+  .hero-meta{
+    margin-top:30px;display:flex;flex-wrap:wrap;gap:0;
+    border-top:1px solid var(--rule);
+  }
+  .hero-meta div{
+    flex:1 1 150px;padding:16px 20px 14px 0;border-right:1px solid var(--rule);
+    padding-left:20px;
+  }
+  .hero-meta div:first-child{padding-left:0}
+  .hero-meta div:last-child{border-right:none}
+  .hero-meta .k{font-family:'JetBrains Mono',monospace;font-size:.66rem;
+    letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:5px}
+  .hero-meta .v{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:600}
+
+  .intro{
+    margin-top:34px;font-size:1.12rem;max-width:64ch;color:var(--ink-soft);
+    font-weight:400;
+  }
+  .intro strong{color:var(--ink);font-weight:600}
+
+  /* ---------- Section frames ---------- */
+  section{padding:58px 0;border-bottom:1px solid var(--rule)}
+  .sec-head{display:flex;align-items:baseline;gap:18px;margin-bottom:8px}
+  .sec-num{font-family:'JetBrains Mono',monospace;font-size:.8rem;color:var(--oxblood);
+    letter-spacing:.1em}
+  .sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(1.9rem,4vw,2.8rem);
+    font-weight:600;line-height:1}
+  .sec-lead{color:var(--ink-soft);max-width:62ch;margin-bottom:34px;font-size:1.05rem}
+
+  /* ---------- Day cards ---------- */
+  .day{
+    display:grid;grid-template-columns:128px 1fr;gap:0;
+    border:1.5px solid var(--ink);margin-bottom:22px;background:rgba(255,255,255,.22);
+    box-shadow:5px 5px 0 var(--shadow);transition:transform .18s ease, box-shadow .18s ease;
+  }
+  .day:hover{transform:translate(-2px,-2px);box-shadow:8px 8px 0 var(--shadow)}
+  .day-rail{
+    background:var(--ink);color:var(--parchment);padding:18px 14px;
+    display:flex;flex-direction:column;justify-content:space-between;
+  }
+  .day-rail .date{font-family:'JetBrains Mono',monospace;font-size:.72rem;
+    letter-spacing:.12em;color:var(--parchment-deep)}
+  .day-rail .dno{font-family:'Cormorant Garamond',serif;font-size:3.2rem;
+    font-weight:600;line-height:.8;margin-top:auto}
+  .day-rail .dow{font-family:'JetBrains Mono',monospace;font-size:.64rem;
+    letter-spacing:.2em;text-transform:uppercase;margin-top:6px;color:var(--gold)}
+  .day-body{padding:20px 24px 22px}
+  .day-city{font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:600;
+    line-height:1.05;margin-bottom:3px}
+  .day-tag{font-style:italic;color:var(--oxblood);font-size:1rem;margin-bottom:14px}
+  .day-rows{display:flex;flex-direction:column;gap:9px}
+  .drow{display:grid;grid-template-columns:96px 1fr;gap:12px;font-size:.95rem;
+    align-items:start;padding-top:9px;border-top:1px dotted var(--rule)}
+  .drow:first-child{border-top:none;padding-top:0}
+  .drow .lab{font-family:'JetBrains Mono',monospace;font-size:.64rem;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--ink-soft);padding-top:3px}
+  .drow .val{color:var(--ink)}
+  .drow .val .em{color:var(--oxblood);font-weight:600}
+  .pill{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:.62rem;
+    letter-spacing:.08em;background:var(--oxblood);color:var(--parchment);
+    padding:2px 8px;border-radius:2px;margin-left:4px;vertical-align:middle}
+  .pill.indigo{background:var(--indigo)}
+  .pill.gold{background:var(--gold);color:var(--ink)}
+
+  /* ---------- Flights strip ---------- */
+  .flights{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  .flight{border:1.5px solid var(--ink);padding:22px 24px;background:rgba(255,255,255,.25);
+    position:relative}
+  .flight .fdir{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.2em;
+    text-transform:uppercase;color:var(--oxblood);margin-bottom:14px}
+  .flight .route{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+  .flight .ap{font-family:'Cormorant Garamond',serif;font-size:2.6rem;font-weight:700;line-height:1}
+  .flight .arrow{flex:1;height:1px;background:var(--ink);position:relative}
+  .flight .arrow::after{content:"►";position:absolute;right:-2px;top:-8px;font-size:.7rem;color:var(--ink)}
+  .flight .frow{display:flex;justify-content:space-between;font-size:.9rem;
+    padding:5px 0;border-top:1px dotted var(--rule)}
+  .flight .frow .l{font-family:'JetBrains Mono',monospace;font-size:.64rem;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--ink-soft);padding-top:3px}
+  .flight .frow .r{font-weight:500}
+
+  /* ---------- Stops / sightseeing ---------- */
+  .stop{border-left:3px solid var(--oxblood);padding:4px 0 26px 26px;position:relative;margin-bottom:4px}
+  .stop::before{content:"";position:absolute;left:-9px;top:6px;width:15px;height:15px;
+    background:var(--parchment);border:3px solid var(--oxblood);border-radius:50%}
+  .stop:last-child{padding-bottom:0}
+  .stop-city{font-family:'Cormorant Garamond',serif;font-size:1.55rem;font-weight:600;margin-bottom:2px}
+  .stop-city span{font-style:italic;font-size:1.05rem;color:var(--ink-soft);font-weight:400}
+  .stop-list{margin-top:12px;display:flex;flex-direction:column;gap:13px}
+  .att{padding-left:0}
+  .att .an{font-weight:600;color:var(--ink)}
+  .att .an .star{color:var(--oxblood);font-size:.8rem;margin-left:6px;
+    font-family:'JetBrains Mono',monospace;letter-spacing:.05em}
+  .att .ad{color:var(--ink-soft);font-size:.96rem;margin-top:2px}
+  .timed{background:rgba(124,45,35,.07);border:1px solid var(--oxblood);
+    padding:14px 16px;margin-top:14px}
+  .timed .th{font-family:'JetBrains Mono',monospace;font-size:.64rem;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--oxblood);margin-bottom:6px;display:flex;align-items:center;gap:8px}
+  .timed .th::before{content:"★";font-size:.9rem}
+  .timed .td{font-size:.96rem}
+  .timed .when{font-weight:600;color:var(--oxblood)}
+
+  /* ---------- Food ---------- */
+  .food-grid{display:flex;flex-direction:column;gap:0}
+  .meal{display:grid;grid-template-columns:120px 1fr;gap:22px;padding:20px 0;
+    border-top:1px solid var(--rule);align-items:start}
+  .meal:first-child{border-top:none}
+  .meal-when{font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--oxblood);padding-top:5px}
+  .meal-when .c{display:block;color:var(--ink-soft);margin-top:3px;font-size:.62rem}
+  .pick{margin-bottom:14px}
+  .pick:last-child{margin-bottom:0}
+  .pick .pn{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;line-height:1.1}
+  .pick .pn .tag{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.08em;
+    text-transform:uppercase;color:var(--parchment);background:var(--indigo);
+    padding:2px 7px;border-radius:2px;margin-left:8px;vertical-align:middle}
+  .pick .pn .tag.asia{background:var(--oxblood)}
+  .pick .pn .tag.amer{background:var(--gold);color:var(--ink)}
+  .pick .pd{color:var(--ink-soft);font-size:.96rem;margin-top:3px}
+  .pick .pmeta{font-family:'JetBrains Mono',monospace;font-size:.66rem;color:var(--ink-soft);
+    margin-top:4px;letter-spacing:.04em}
+
+  /* ---------- Shows / notes ---------- */
+  .callout{border:1.5px solid var(--ink);background:rgba(255,255,255,.25);padding:26px 28px;margin-bottom:20px}
+  .callout h3{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:600;margin-bottom:10px;
+    display:flex;align-items:center;gap:10px}
+  .callout h3 .ic{color:var(--oxblood);font-size:1.1rem}
+  .callout p{color:var(--ink-soft);margin-bottom:10px}
+  .callout p:last-child{margin-bottom:0}
+  .callout a{color:var(--oxblood);text-decoration:underline;text-underline-offset:2px}
+  .notes-list{list-style:none;display:flex;flex-direction:column;gap:16px}
+  .notes-list li{display:grid;grid-template-columns:28px 1fr;gap:14px;align-items:start}
+  .notes-list .ni{font-family:'Cormorant Garamond',serif;font-weight:700;color:var(--oxblood);
+    font-size:1.3rem;line-height:1.2}
+  .notes-list .nt strong{color:var(--ink);font-weight:600}
+  .notes-list .nt{color:var(--ink-soft)}
+
+  /* ---------- Footer ---------- */
+  footer{padding:46px 0 70px;text-align:center}
+  footer .seal{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.4rem;
+    color:var(--oxblood);margin-bottom:10px}
+  footer .fine{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.1em;
+    color:var(--ink-soft);text-transform:uppercase}
+
+  /* reveal */
+  .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease, transform .6s ease}
+  .reveal.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){
+    .reveal{opacity:1;transform:none;transition:none}
+    .day:hover{transform:none}
+    html{scroll-behavior:auto}
+  }
+
+  @media(max-width:720px){
+    .hero{padding:48px 0 30px}
+    .hero-meta div{flex:1 1 50%;border-right:none;border-bottom:1px solid var(--rule)}
+    .flights{grid-template-columns:1fr}
+    .day{grid-template-columns:84px 1fr}
+    .day-rail .dno{font-size:2.4rem}
+    .drow{grid-template-columns:74px 1fr;gap:9px}
+    .meal{grid-template-columns:1fr;gap:8px}
+    .meal-when{padding-top:0}
+    .att .an{display:block}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ============ HERO ============ -->
+  <header class="hero">
+    <div class="eyebrow">Chen Family Expedition · America's Semiquincentennial</div>
+    <h1>The Northeast Circuit
+      <span class="sub">Six colleges, one revolution, 1776 → 2026</span>
+    </h1>
+    <p class="intro">
+      Nine days up the old colonial corridor, from the harbor that sparked a revolution to the hall
+      where independence was signed — timed to land in <strong>Philadelphia for the 250th Fourth of July</strong>,
+      then deliver <strong>Alrisha</strong> to the summer program at Penn. Part college tour, part founding-era
+      pilgrimage, with the country's birthday unfolding in real time around us.
+    </p>
+    <div class="hero-meta">
+      <div><div class="k">Dates</div><div class="v">Jun 28 – Jul 6</div></div>
+      <div><div class="k">Route</div><div class="v">BOS → PHL</div></div>
+      <div><div class="k">Driving</div><div class="v">≈ 375 mi</div></div>
+      <div><div class="k">Travelers</div><div class="v">4 → 3</div></div>
+    </div>
+  </header>
+
+  <!-- ============ FLIGHTS ============ -->
+  <section id="flights">
+    <div class="sec-head"><span class="sec-num">№ 01</span><h2 class="sec-title">By Air</h2></div>
+    <p class="sec-lead">United, both directions. The return is a dawn departure — plan the last night around it.</p>
+    <div class="flights">
+      <div class="flight reveal">
+        <div class="fdir">Outbound · Sun Jun 28</div>
+        <div class="route"><span class="ap">SFO</span><span class="arrow"></span><span class="ap">BOS</span></div>
+        <div class="frow"><span class="l">Flight</span><span class="r">UA 2356 · 737 MAX 9</span></div>
+        <div class="frow"><span class="l">Depart</span><span class="r">10:05 AM PT</span></div>
+        <div class="frow"><span class="l">Arrive</span><span class="r">6:59 PM ET</span></div>
+        <div class="frow"><span class="l">Duration</span><span class="r">5h 54m</span></div>
+        <div class="frow"><span class="l">Seats</span><span class="r">8C · 8B · 15C · 15B</span></div>
+      </div>
+      <div class="flight reveal">
+        <div class="fdir">Return · Mon Jul 6</div>
+        <div class="route"><span class="ap">PHL</span><span class="arrow"></span><span class="ap">SFO</span></div>
+        <div class="frow"><span class="l">Flight</span><span class="r">UA 2661 · 737 MAX 9</span></div>
+        <div class="frow"><span class="l">Depart</span><span class="r">6:00 AM ET</span></div>
+        <div class="frow"><span class="l">Arrive</span><span class="r">8:58 AM PT</span></div>
+        <div class="frow"><span class="l">Duration</span><span class="r">5h 58m</span></div>
+        <div class="frow"><span class="l">Seats</span><span class="r">12D · 12E · 14D</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ITINERARY ============ -->
+  <section id="itinerary">
+    <div class="sec-head"><span class="sec-num">№ 02</span><h2 class="sec-title">Day by Day</h2></div>
+    <p class="sec-lead">Hotels, drives, and the running order. Drive times are off-peak estimates; the Fourth-of-July leg into Philadelphia is the one to leave early for.</p>
+
+    <!-- Day 1 -->
+    <article class="day reveal">
+      <div class="day-rail"><div class="date">Jun 28</div><div><div class="dno">1</div><div class="dow">Sunday</div></div></div>
+      <div class="day-body">
+        <div class="day-city">Land in Boston</div>
+        <div class="day-tag">Arrive & settle in Cambridge</div>
+        <div class="day-rows">
+          <div class="drow"><span class="lab">Arrive</span><span class="val">BOS <span class="em">6:59 PM</span> · collect the Avis SUV · drive to Cambridge (~20 min)</span></div>
+          <div class="drow"><span class="lab">Hotel</span><span class="val"><span class="em">Sheraton Commander</span>, 16 Garden St, Cambridge<span class="pill indigo">2 nights</span></span></div>
+          <div class="drow"><span class="lab">Parking</span><span class="val">Valet $45/day</span></div>
+          <div class="drow"><span class="lab">Evening</span><span class="val">Light dinner near Harvard Square — you'll arrive tired</span></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Day 2 -->
+    <article class="day reveal">
+      <div class="day-rail"><div class="date">Jun 29</div><div><div class="dno">2</div><div class="dow">Monday</div></div></div>
+      <div class="day-body">
+        <div class="day-city">Harvard & MIT</div>
+        <div class="day-tag">Two campuses, ten minutes apart</div>
+        <div class="day-rows">
+          <div class="drow"><span class="lab">Morning</span><span class="val">Harvard Yard + official tour from the Smith Center</span></div>
+          <div class="drow"><span class="lab">Afternoon</span><span class="val">MIT — Infinite Corridor, Great Dome, MIT Museum</span></div>
+          <div class="drow"><span class="lab">History</span><span class="val">Freedom Trail is a short hop — Boston is the revolution's birthplace<span class="pill">250th</span></span></div>
+          <div class="drow"><span class="lab">Hotel</span><span class="val"><span class="em">Sheraton Commander</span>, Cambridge</span></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Day 3 -->
+    <article class="day reveal">
+      <div class="day-rail"><div class="date">Jun 30</div><div><div class="dno">3</div><div class="dow">Tuesday</div></div></div>
+      <div class="day-body">
+        <div class="day-city">Providence</div>
+        <div class="day-tag">Brown & RISD on College Hill</div>
+        <div class="day-rows">
+          <div class="drow"><span class="lab">Drive</span><span class="val">Cambridge → Providence · <span class="em">~1 hr</span> · 50 mi</span></div>
+          <div class="drow"><span class="lab">Visit</span><span class="val">Brown's Main Green + Thayer St; RISD Museum</span></div>
+          <div class="drow"><span class="lab">Hotel</span><span class="val"><span class="em">Renaissance Providence Downtown</span>, 5 Ave of the Arts<span class="pill indigo">1 night</span></span></div>
+          <div class="drow"><span class="lab">Parking</span><span class="val">Valet $45/day</span></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Day 4 -->
+    <article class="day reveal">
+      <div class="day-rail"><div class="date">Jul 1</div><div><div class="dno">4</div><div class="dow">Wednesday</div></div></div>
+      <div class="day-body">
+        <div class="day-city">Newport</div>
+        <div class="day-tag">A coastal day among the Gilded Age</div>
+        <div class="day-rows">
+          <div class="drow"><span class="lab">Drive</span><span class="val">Providence → Newport · <span class="em">~45 min</span> · 35 mi</span></div>
+          <div class="drow"><span class="lab">Do</span><span class="val">Cliff Walk + The Breakers mansion tour; Bowen's Wharf</span></div>
+          <div class="drow"><span class="lab">Hotel</span><span class="val"><span class="em">Newport Harbor Island Resort</span>, 1 Goat Island<span class="pill indigo">1 night</span></span></div>
+          <div class="drow"><span class="lab">Note</span><span class="val">Resort sits on Goat Island — harbor views, on-site parking</span></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Day 5 -->
+    <article class="day reveal">
+      <div class="day-rail"><div class="date">Jul 2</div><div><div class="dno">5</div><div class="dow">Thursday</div></div></div>
+      <div class="day-body">
+        <div class="day-city">New Haven</div>
+        <div class="day-tag">Yale — and the pizza capital of America</div>
+        <div class="day-rows">
+          <div class="drow"><span class="lab">Drive</span><span class="val">Newport → New Haven · <span class="em">~2 hr 15 min</span> · 125 mi</span></div>
+          <div class="drow"><span class="lab">Visit</span><span class="val">Old Campus, Sterling Library, Yale University Art Gallery (free)</span></div>
+          <div class="drow"><span class="lab">Hotel</span><span class="val"><span class="em">Courtyard by Marriott New Haven at Yale</span>, 30 Whalley Ave<span class="pill indigo">1 night</span></span></div>
+          <div class="drow"><span class="lab">Parking</span><span class="val">On-site $25/day</span></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Day 6 -->
+    <article class="day reveal">
+      <div class="day-rail"><div class="date">Jul 3</div><div><div class="dno">6</div><div class="dow">Friday</div></div></div>
+      <div class="day-body">
+        <div class="day-city">Princeton</div>
+        <div class="day-tag">Nassau Hall & the orange bubble</div>
+        <div class="day-rows">
+          <div class="drow"><span class="lab">Drive</span><span class="val">New Haven → Princeton · <span class="em">~2 hr 15 min</span> · 120 mi</span></div>
+          <div class="drow"><span class="lab">Visit</span><span class="val">Nassau Hall, University Chapel, Princeton University Art Museum</span></div>
+          <div class="drow"><span class="lab">History</span><span class="val">Nassau Hall briefly held the U.S. capital in 1783<span class="pill">250th</span></span></div>
+          <div class="drow"><span class="lab">Hotel</span><span class="val"><span class="em">Westin Princeton at Forrestal Village</span>, 201 Village Blvd<span class="pill indigo">1 night</span></span></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Day 7 -->
+    <article class="day reveal">
+      <div class="day-rail"><div class="date">Jul 4</div><div><div class="dno">7</div><div class="dow">Saturday</div></div></div>
+      <div class="day-body">
+        <div class="day-city">Philadelphia · Independence Day</div>
+        <div class="day-tag">The birthplace, on the 250th Fourth</div>
+        <div class="day-rows">
+          <div class="drow"><span class="lab">Drive</span><span class="val">Princeton → Philadelphia · <span class="em">~1 hr</span> · 45 mi · <span class="em">leave early — road closures</span></span></div>
+          <div class="drow"><span class="lab">Do</span><span class="val">Independence Hall, Liberty Bell, Party on the Parkway concert & fireworks<span class="pill gold">Time-locked</span></span></div>
+          <div class="drow"><span class="lab">Hotel</span><span class="val"><span class="em">Sheraton Philadelphia University City</span>, 3549 Chestnut St<span class="pill indigo">2 nights</span></span></div>
+          <div class="drow"><span class="lab">Note</span><span class="val">Steps from Penn — ideal base for the program drop-off</span></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Day 8 -->
+    <article class="day reveal">
+      <div class="day-rail"><div class="date">Jul 5</div><div><div class="dno">8</div><div class="dow">Sunday</div></div></div>
+      <div class="day-body">
+        <div class="day-city">Penn Drop-Off</div>
+        <div class="day-tag">Alrisha begins · program starts Jul 5</div>
+        <div class="day-rows">
+          <div class="drow"><span class="lab">Morning</span><span class="val">Settle Alrisha into the Penn summer program</span></div>
+          <div class="drow"><span class="lab">Afternoon</span><span class="val">Explore Penn campus, Locust Walk, the Penn Museum</span></div>
+          <div class="drow"><span class="lab">Car</span><span class="val"><span class="em">Return the Avis SUV to PHL this evening</span> — avoid a 4 AM rental return</span></div>
+          <div class="drow"><span class="lab">Lodging</span><span class="val">Last Sheraton University City night — or relocate to a PHL airport hotel<span class="pill">see notes</span></span></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Day 9 -->
+    <article class="day reveal">
+      <div class="day-rail"><div class="date">Jul 6</div><div><div class="dno">9</div><div class="dow">Monday</div></div></div>
+      <div class="day-body">
+        <div class="day-city">Fly Home</div>
+        <div class="day-tag">PHL → SFO · party of three</div>
+        <div class="day-rows">
+          <div class="drow"><span class="lab">Pre-dawn</span><span class="val">Leave for PHL by <span class="em">4:15 AM</span> — security + boarding</span></div>
+          <div class="drow"><span class="lab">Flight</span><span class="val">UA 2661 · depart <span class="em">6:00 AM ET</span>, arrive 8:58 AM PT</span></div>
+          <div class="drow"><span class="lab">Home</span><span class="val">Back in the Bay Area before noon</span></div>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- ============ SIGHTSEEING ============ -->
+  <section id="sights">
+    <div class="sec-head"><span class="sec-num">№ 03</span><h2 class="sec-title">What's Worth Seeing</h2></div>
+    <p class="sec-lead">Each stop earns its place twice over — as a campus to weigh and as a chapter in the founding story. A few things are date- and time-locked for the 250th; those are flagged.</p>
+
+    <div class="stop reveal">
+      <div class="stop-city">Boston & Cambridge <span>— where it started</span></div>
+      <div class="stop-list">
+        <div class="att"><div class="an">Harvard Yard & the campus tour</div><div class="ad">The oldest college in the country (1636). The student-led tour from the Smith Center is the best read on student life; the Yard itself is open to wander.</div></div>
+        <div class="att"><div class="an">MIT — Infinite Corridor & MIT Museum</div><div class="ad">A completely different flavor of ambition ten minutes away. The museum's robotics and AI galleries will land for a tinkerer.</div></div>
+        <div class="att"><div class="an">The Freedom Trail</div><div class="ad">A 2.5-mile red line through 16 revolutionary sites — Old North Church, Paul Revere's house, the site of the Boston Massacre. Boston is the city that "ignited a revolution," and 2026 marks the 250th of Bunker Hill and Revere's ride.</div></div>
+      </div>
+    </div>
+
+    <div class="stop reveal">
+      <div class="stop-city">Providence <span>— College Hill</span></div>
+      <div class="stop-list">
+        <div class="att"><div class="an">Brown University</div><div class="ad">Open curriculum, Ivy League, and one of the prettiest urban campuses in New England. Walk the Main Green and down Thayer Street.</div></div>
+        <div class="att"><div class="an">RISD Museum</div><div class="ad">A genuinely great art museum attached to the country's premier design school — strong across periods, rarely crowded.</div></div>
+        <div class="att"><div class="an">Benefit Street's "Mile of History"</div><div class="ad">One of the densest stretches of preserved colonial and Federal architecture in America, right below the campuses.</div></div>
+      </div>
+    </div>
+
+    <div class="stop reveal">
+      <div class="stop-city">Newport <span>— the coastal exhale</span></div>
+      <div class="stop-list">
+        <div class="att"><div class="an">The Cliff Walk</div><div class="ad">A 3.5-mile public path with the Atlantic on one side and Gilded Age mansions on the other. The single most scenic break of the trip.</div></div>
+        <div class="att"><div class="an">The Breakers</div><div class="ad">The Vanderbilt summer "cottage" — the grandest of the Newport mansions. Buy the timed tour ahead in peak season.</div></div>
+        <div class="att"><div class="an">Colonial Newport</div><div class="ad">Predating the mansions by a century: the 1763 Touro Synagogue (oldest in the U.S.) and the Brick Market speak to the town's revolutionary-era merchant wealth.</div></div>
+      </div>
+    </div>
+
+    <div class="stop reveal">
+      <div class="stop-city">New Haven <span>— Yale</span></div>
+      <div class="stop-list">
+        <div class="att"><div class="an">Yale Old Campus & Sterling Memorial Library</div><div class="ad">Sterling is a cathedral built for books — worth the detour on its own. Old Campus is where freshmen live.</div></div>
+        <div class="att"><div class="an">Yale University Art Gallery</div><div class="ad">The oldest university art museum in the western hemisphere, and free. A quiet highlight.</div></div>
+        <div class="att"><div class="an">Wooster Street "Apizza"</div><div class="ad">New Haven is, by wide agreement, the best pizza city in America — a sightseeing item in its own right (see the table).</div></div>
+      </div>
+    </div>
+
+    <div class="stop reveal">
+      <div class="stop-city">Princeton <span>— Nassau Hall</span></div>
+      <div class="stop-list">
+        <div class="att"><div class="an">Nassau Hall</div><div class="ad">When it was built in 1756 it was the largest stone building in the colonies. It served as the U.S. Capitol for four months in 1783 — the Continental Congress met here.</div></div>
+        <div class="att"><div class="an">Princeton University Chapel & Art Museum</div><div class="ad">The chapel is one of the largest collegiate churches in the world; the newly rebuilt art museum reopened in 2025.</div></div>
+        <div class="att"><div class="an">Princeton Battlefield</div><div class="ad">Washington's January 1777 victory turned the Revolution's momentum. The field is a short drive from campus.</div></div>
+      </div>
+    </div>
+
+    <div class="stop reveal">
+      <div class="stop-city">Philadelphia <span>— the birthplace, on the 250th</span></div>
+      <div class="stop-list">
+        <div class="att"><div class="an">Independence Hall <span class="star">book timed tickets</span></div><div class="ad">The room where both the Declaration (1776) and the Constitution (1787) were signed. Free, but timed tickets vanish fast for July 4 weekend — reserve on recreation.gov the moment they open.</div></div>
+        <div class="att"><div class="an">The Liberty Bell</div><div class="ad">Across the street, free, no ticket. Go early to beat the holiday crowds.</div></div>
+        <div class="att"><div class="an">First Bank of the United States <span class="star">new for 2026</span></div><div class="ad">Reopening to the public for the first time in ~50 years on July 1, 2026, with new exhibits on Hamilton and the nation's first financial system.</div></div>
+        <div class="att"><div class="an">Museum of the American Revolution</div><div class="ad">The best single museum for the full story — Washington's actual field tent is the centerpiece.</div></div>
+        <div class="att"><div class="an">University of Pennsylvania & Wharton</div><div class="ad">Locust Walk runs through the heart of campus; the Penn Museum's antiquities collection is world-class. This is Alrisha's summer home.</div></div>
+
+        <div class="timed">
+          <div class="th">Time-locked · the 250th Fourth</div>
+          <div class="td">
+            <span class="when">Jul 4 evening —</span> Wawa Welcome America's <strong>Party on the Parkway</strong> closes with a major free concert and fireworks over the Philadelphia Museum of Art (the "Rocky steps"). This is <em>the</em> place to be in the country on July 4, 2026.<br><br>
+            <span class="when">Jul 4, daytime —</span> A national <strong>time capsule</strong> is to be buried on Independence Mall as part of the federal ceremony. Expect heavy security and street closures across Old City and the Parkway — build extra time into every plan that day.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOD ============ -->
+  <section id="food">
+    <div class="sec-head"><span class="sec-num">№ 04</span><h2 class="sec-title">Where to Eat</h2></div>
+    <p class="sec-lead">One dinner pick per night, with a local-authentic lead and an Asian or American alternate to keep the table happy. Target ≈ <strong>$50 per person</strong> before drinks; the two resort nights (Newport, Jul 4 Philly) can run higher.</p>
+
+    <div class="food-grid">
+      <!-- Cambridge -->
+      <div class="meal reveal">
+        <div class="meal-when">Jun 28–29<span class="c">Cambridge</span></div>
+        <div>
+          <div class="pick"><div class="pn">Wusong Road <span class="tag asia">Asian</span></div><div class="pd">A wildly popular Cantonese-tiki spot off Harvard Square — Dan Dan ragu, maple-pork dumplings, crab rangoon. Big shareable menu, fun room. Call ahead for the waitlist.</div><div class="pmeta">4.8★ · $$ · 112 Mt Auburn St</div></div>
+          <div class="pick"><div class="pn">Alden &amp; Harlow <span class="tag amer">American</span></div><div class="pd">Inventive New England small plates in a dim, lively basement on Brattle St. Order several and share.</div><div class="pmeta">4.4★ · $$$ · 40 Brattle St</div></div>
+        </div>
+      </div>
+
+      <!-- Providence -->
+      <div class="meal reveal">
+        <div class="meal-when">Jun 30<span class="c">Providence</span></div>
+        <div>
+          <div class="pick"><div class="pn">The Patio on Broadway <span class="tag amer">American</span></div><div class="pd">Beloved local kitchen — crispy duck meatballs, seasonal New England plates, great cocktails. Reserve.</div><div class="pmeta">4.7★ · $$ · 166 Broadway</div></div>
+          <div class="pick"><div class="pn">The Slow Rhode <span class="tag amer">American</span></div><div class="pd">Cozy late-night neighborhood spot with ribs, duck poutine and a strong bar — easy family dinner.</div><div class="pmeta">4.7★ · $$ · 425 W Fountain St</div></div>
+        </div>
+      </div>
+
+      <!-- Newport -->
+      <div class="meal reveal">
+        <div class="meal-when">Jul 1<span class="c">Newport</span></div>
+        <div>
+          <div class="pick"><div class="pn">The Mooring <span class="tag amer">Seafood</span></div><div class="pd">Harborfront Newport institution — oysters, clam chowder, lobster, the famous "bag of doughnuts" lobster fritters. Packed with locals; reserve ahead.</div><div class="pmeta">4.6★ · $$$ · 1 Sayers Wharf</div></div>
+          <div class="pick"><div class="pn">The Red Parrot <span class="tag amer">American</span></div><div class="pd">Lively downtown three-story spot with a huge menu — lobster nachos, tacos, something for every kid.</div><div class="pmeta">4.4★ · $$ · 348 Thames St</div></div>
+        </div>
+      </div>
+
+      <!-- New Haven -->
+      <div class="meal reveal">
+        <div class="meal-when">Jul 2<span class="c">New Haven</span></div>
+        <div>
+          <div class="pick"><div class="pn">Frank Pepe Pizzeria <span class="tag amer">Apizza</span></div><div class="pd">The 1925 original — coal-fired white clam pie is the order. This is the dish New Haven is famous for. Expect a line; the takeaway window next door is faster.</div><div class="pmeta">4.5★ · $$ · 157 Wooster St</div></div>
+          <div class="pick"><div class="pn">Zeneli Pizzeria <span class="tag amer">Neapolitan</span></div><div class="pd">If the Pepe line is brutal, this Wooster St. neighbor is the highest-rated pizza in town — true Neapolitan, fresh pastas.</div><div class="pmeta">4.8★ · $$ · 138 Wooster St</div></div>
+        </div>
+      </div>
+
+      <!-- Princeton -->
+      <div class="meal reveal">
+        <div class="meal-when">Jul 3<span class="c">Princeton</span></div>
+        <div>
+          <div class="pick"><div class="pn">Agricola Eatery <span class="tag amer">Farm-to-table</span></div><div class="pd">Princeton's signature farm-to-table room on Witherspoon St — seasonal, fresh, reliably good. Reserve for a Friday.</div><div class="pmeta">4.5★ · $$$ · 11 Witherspoon St</div></div>
+          <div class="pick"><div class="pn">The Meeting House <span class="tag amer">American</span></div><div class="pd">Relaxed New American with the best patio in town, half a mile from campus. Easy parking.</div><div class="pmeta">4.3★ · $$ · 277 Witherspoon St</div></div>
+        </div>
+      </div>
+
+      <!-- Philadelphia -->
+      <div class="meal reveal">
+        <div class="meal-when">Jul 4–5<span class="c">Philadelphia</span></div>
+        <div>
+          <div class="pick"><div class="pn">White Dog Cafe <span class="tag amer">American</span></div><div class="pd">A University City classic right by Penn — farm-to-table, quirky multi-room space, great for a celebratory family dinner. Walkable from the Sheraton.</div><div class="pmeta">4.4★ · $$$ · 3420 Sansom St</div></div>
+          <div class="pick"><div class="pn">Louie Louie <span class="tag amer">Brasserie</span></div><div class="pd">Polished French-American brasserie on Walnut St, steps from campus — a lighter, livelier option for the second night.</div><div class="pmeta">4.2★ · $$ · 3611 Walnut St</div></div>
+          <div class="pick"><div class="pn">Reading Terminal Market <span class="tag asia">Mixed</span></div><div class="pd">Not dinner, but don't miss it: a historic market hall with Pennsylvania Dutch, Chinatown-adjacent stalls, and a Philly cheesesteak in one place. Great cheap lunch on the 4th or 5th.</div><div class="pmeta">12th &amp; Arch · open daytime</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SHOWS ============ -->
+  <section id="shows">
+    <div class="sec-head"><span class="sec-num">№ 05</span><h2 class="sec-title">Shows &amp; Tickets to Book</h2></div>
+    <p class="sec-lead">The signature events are free but unticketed (first-come), while the must-do museums are ticketed and will sell out for the holiday. Book the ticketed items the day they open.</p>
+
+    <div class="callout reveal">
+      <h3><span class="ic">★</span>Party on the Parkway — Jul 4, free</h3>
+      <p>The headline event: a free concert and the city's biggest fireworks display over the Art Museum, the climax of the Wawa Welcome America festival. No ticket required, but the Parkway fills early — stake out a spot in the afternoon. Check the lineup and timing at <a href="https://welcomeamerica.com" target="_blank" rel="noopener">welcomeamerica.com</a> closer to the date.</p>
+    </div>
+
+    <div class="callout reveal">
+      <h3><span class="ic">▲</span>Independence Hall — reserve timed tickets</h3>
+      <p>Free, but timed entry is required and July 4 weekend slots disappear weeks out. Set a reminder and book the instant they release on <a href="https://www.recreation.gov" target="_blank" rel="noopener">recreation.gov</a>. This is the single most important reservation of the trip.</p>
+    </div>
+
+    <div class="callout reveal">
+      <h3><span class="ic">●</span>Optional: a paid evening show</h3>
+      <p>If you want a seated, guaranteed evening rather than a festival crowd, two things to watch: the <strong>Philly Pops / Mann Center</strong> summer programming around the 250th, and the new <strong>First Bank of the United States</strong> exhibits (opening Jul 1). Both are worth checking on <a href="https://www.visitphilly.com/2026-philadelphia" target="_blank" rel="noopener">visitphilly.com/2026</a>. There's no single arena concert that's a clear must-book yet — the free Parkway show is the centerpiece.</p>
+    </div>
+  </section>
+
+  <!-- ============ NOTES ============ -->
+  <section id="notes">
+    <div class="sec-head"><span class="sec-num">№ 06</span><h2 class="sec-title">Before You Go</h2></div>
+    <p class="sec-lead">A short list of the things most likely to trip up a holiday-weekend trip — read once, fix now.</p>
+
+    <ul class="notes-list">
+      <li class="reveal"><span class="ni">1</span><span class="nt"><strong>The Jul 6 flight is 6:00 AM.</strong> That means leaving for PHL around 4:15 AM. Either book a PHL airport hotel for the last night, or set two alarms and pre-arrange a 4 AM rideshare — and return the rental car the evening of Jul 5 so you're not dealing with it pre-dawn.</span></li>
+      <li class="reveal"><span class="ni">2</span><span class="nt"><strong>Book Independence Hall tickets the day they open.</strong> Free timed tickets on recreation.gov sell out fastest for July 4 weekend. This is the reservation people most regret missing.</span></li>
+      <li class="reveal"><span class="ni">3</span><span class="nt"><strong>Expect road closures in Philadelphia on the 4th.</strong> Old City and the Ben Franklin Parkway close for the parade, ceremony, and fireworks. Driving in from Princeton, leave early and be ready to park once and walk.</span></li>
+      <li class="reveal"><span class="ni">4</span><span class="nt"><strong>Most campus tours run weekdays only.</strong> The schedule already lands Harvard, MIT, Brown, RISD, Yale and Princeton on Mon–Fri — but confirm and reserve each official tour in advance, as summer slots fill.</span></li>
+      <li class="reveal"><span class="ni">5</span><span class="nt"><strong>Two nights will run above the $50/person dinner target.</strong> Newport (resort town) and Jul 4 in Philadelphia are the splurge nights — the alternates listed for those stops keep things closer to budget if you'd rather save it for the celebration.</span></li>
+      <li class="reveal"><span class="ni">6</span><span class="nt"><strong>Confirm the trip-cancellation coverage on the card that paid the flights.</strong> Pay hotels on the same card so the protection extends to them, and keep every confirmation in one folder.</span></li>
+      <li class="reveal"><span class="ni">7</span><span class="nt"><strong>Heat &amp; crowds.</strong> Early July on the East Coast is hot and humid. Pack water, comfortable shoes for cobblestones and the Cliff Walk, and a light layer for over-air-conditioned museums.</span></li>
+    </ul>
+  </section>
+
+  <footer>
+    <div class="seal">"...one people, dissolving the bands, and assuming among the powers of the earth."</div>
+    <div class="fine">Chen Family · Northeast Circuit · Jun 28 – Jul 6, 2026</div>
+  </footer>
+
+</div>
+
+<script>
+  // scroll reveal
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+  },{threshold:.12, rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
