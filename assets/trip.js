@@ -58,7 +58,7 @@ window.TRIP = {
   days: [
     {
       n: 1, date: "Jun 28", dateLong: "Sunday, June 28", dow: "Sun", art: "boston",
-      acc: { l:'#9e1b32', li:'#8f1730', d:'#ff6378', di:'#ff8c9c' }, motif: 'ship',
+      acc: { l:'#fb4d42', li:'#c2362c', d:'#ff6b5e', di:'#ff8c82' }, motif: 'ship',
       city: "Boston", title: "Land in Boston", tagline: "Arrive and settle in Cambridge",
       pin: 1, coords: [42.3770, -71.1167],
       hotel: { name: "Sheraton Commander", addr: "16 Garden St, Cambridge, MA 02138", parking: "Valet $45/day", nights: "2 nights", q: "Sheraton Commander, 16 Garden St, Cambridge, MA 02138" },
@@ -105,7 +105,7 @@ window.TRIP = {
 
     {
       n: 3, date: "Jun 30", dateLong: "Tuesday, June 30", dow: "Tue", art: "providence",
-      acc: { l:'#8a3324', li:'#7c2e20', d:'#df8b70', di:'#e7a48c' }, motif: 'book',
+      acc: { l:'#4e3629', li:'#4e3629', d:'#c49a6c', di:'#d7b48c' }, motif: 'book',
       tours: [
         { school: "Brown", url: "https://apply.college.brown.edu/portal/campus-visit", note: "Pre-register; groups are capped at 3, so book two registrations for four. Check in at the Henderson Welcome Center, 21 Prospect St." },
         { school: "RISD", url: "https://admissions.risd.edu/portal/undergrad-events", note: "Register through the Undergraduate Events portal. The admissions house is next door to Brown, easy to pair on the same day." }
