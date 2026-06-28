@@ -11,9 +11,9 @@
      Until repoId / categoryId are filled, a friendly setup note shows instead. */
   var GISCUS = {
     repo:       'LeoHChen/east-coast-visit-summer-2026',
-    repoId:     'R_PASTE_REPO_ID_HERE',
+    repoId:     'R_kgDOTHIccw',
     category:   'General',
-    categoryId: 'DIC_PASTE_CATEGORY_ID_HERE',
+    categoryId: 'DIC_kwDOTHIcc84DABxK',
     mapping:    'pathname'
   };
   function giscusReady(){ return GISCUS.repoId.indexOf('PASTE')<0 && GISCUS.categoryId.indexOf('PASTE')<0; }
@@ -35,6 +35,7 @@
   function setTheme(mode){
     document.documentElement.setAttribute('data-theme', mode);
     try{ localStorage.setItem('theme', mode); }catch(e){}
+    if(window.applyDayAccent) window.applyDayAccent();
     applyToggleIcon();
     setGiscusTheme(mode);
     swapMapTiles(mode);
@@ -89,7 +90,7 @@
     s.setAttribute('data-strict', '0');
     s.setAttribute('data-reactions-enabled', '1');
     s.setAttribute('data-emit-metadata', '0');
-    s.setAttribute('data-input-position', 'top');
+    s.setAttribute('data-input-position', 'bottom');
     s.setAttribute('data-theme', resolved());
     s.setAttribute('data-lang', 'en');
     s.setAttribute('crossorigin', 'anonymous');

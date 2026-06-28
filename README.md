@@ -39,10 +39,12 @@ python3 -m http.server 8000
 
 ### Features
 
+- **US flag / Independence Day theme**: navy + Old Glory red + cream, with a stars watermark on the home and the Jul 4 page.
+- **Per-page color**: each day picks up its city or university's color (Harvard crimson, Brown brick, Newport teal, Yale blue, Princeton orange, Penn red, and so on) with a subtle watermark motif.
 - **Page-turn animation** between days (View Transitions API, with a reduced-motion fallback).
 - **Light and dark mode** (follows the system; toggle in the top right).
 - **Interactive route map** (Leaflet + OpenStreetMap/CARTO tiles, no API key) with numbered pins and a leg-by-leg distance table (about 375 mi, 7.5 hr total).
-- **Photos and journal per day** via Giscus (see setup below).
+- **Photos and journal per day** via Giscus (already configured for this repo).
 
 ## Adding photos and journals (the family)
 

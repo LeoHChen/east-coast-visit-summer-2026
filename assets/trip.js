@@ -19,6 +19,7 @@ window.TRIP = {
     driveTime: "approx 7.5 hr",
     travelers: "4 out, 3 home",
     family: ["Hao", "Alrisha", "Altair"],
+    acc: { l:'#b31942', li:'#a3173b', d:'#ff5366', di:'#ff8597' }, motif: 'stars',
     seal: "...one people, dissolving the bands, and assuming among the powers of the earth.",
     flights: [
       {
@@ -45,7 +46,7 @@ window.TRIP = {
     car: "Avis Standard SUV, confirmation 13843363US2. Pick up at BOS on Jun 28 (about 7:30 PM after landing), return to PHL the evening of Jul 5.",
     notes: [
       { t: "The Jul 6 flight is 6:00 AM.", d: "That means leaving for PHL around 4:15 AM. Either book a PHL airport hotel for the last night, or set two alarms and pre-arrange a 4 AM rideshare. Return the rental car the evening of Jul 5 so you are not dealing with it pre-dawn." },
-      { t: "Book Independence Hall tickets the day they open.", d: "Free timed tickets on recreation.gov sell out fastest for July 4 weekend. This is the reservation people most regret missing." },
+      { t: "Independence Hall is free over the holiday, no reservation needed.", d: "From July 1 to 4, 2026 no timed ticket is required, so you can just walk up. Go early in the day to get ahead of the crowds and the security screening around Independence Mall." },
       { t: "Expect road closures in Philadelphia on the 4th.", d: "Old City and the Ben Franklin Parkway close for the parade, ceremony, and fireworks. Driving in from Princeton, leave early and be ready to park once and walk." },
       { t: "Most campus tours run weekdays only.", d: "The schedule already lands Harvard, MIT, Brown, RISD, Yale and Princeton on Mon to Fri, but confirm and reserve each official tour in advance, as summer slots fill." },
       { t: "Two nights will run above the $50 per person dinner target.", d: "Newport (resort town) and Jul 4 in Philadelphia are the splurge nights. The alternates listed for those stops keep things closer to budget." },
@@ -57,6 +58,7 @@ window.TRIP = {
   days: [
     {
       n: 1, date: "Jun 28", dateLong: "Sunday, June 28", dow: "Sun", art: "boston",
+      acc: { l:'#9e1b32', li:'#8f1730', d:'#ff6378', di:'#ff8c9c' }, motif: 'ship',
       city: "Boston", title: "Land in Boston", tagline: "Arrive and settle in Cambridge",
       pin: 1, coords: [42.3770, -71.1167],
       hotel: { name: "Sheraton Commander", addr: "16 Garden St, Cambridge, MA 02138", parking: "Valet $45/day", nights: "2 nights", q: "Sheraton Commander, 16 Garden St, Cambridge, MA 02138" },
@@ -75,6 +77,7 @@ window.TRIP = {
 
     {
       n: 2, date: "Jun 29", dateLong: "Monday, June 29", dow: "Mon", art: "boston",
+      acc: { l:'#a51c30', li:'#9c1a2d', d:'#f0586e', di:'#f58a9a' }, motif: 'shield',
       city: "Cambridge", title: "Harvard and MIT", tagline: "Two campuses, ten minutes apart",
       pin: null, coords: [42.3736, -71.1097],
       hotel: { name: "Sheraton Commander", addr: "16 Garden St, Cambridge, MA 02138", parking: "Valet $45/day", nights: "night 2 of 2", q: "Sheraton Commander, 16 Garden St, Cambridge, MA 02138" },
@@ -98,6 +101,7 @@ window.TRIP = {
 
     {
       n: 3, date: "Jun 30", dateLong: "Tuesday, June 30", dow: "Tue", art: "providence",
+      acc: { l:'#8a3324', li:'#7c2e20', d:'#df8b70', di:'#e7a48c' }, motif: 'book',
       city: "Providence", title: "Providence", tagline: "Brown and RISD on College Hill",
       pin: 2, coords: [41.8268, -71.4025],
       drive: { from: "Cambridge", to: "Providence", miles: "50 mi", time: "about 1 hr" },
@@ -122,6 +126,7 @@ window.TRIP = {
 
     {
       n: 4, date: "Jul 1", dateLong: "Wednesday, July 1", dow: "Wed", art: "newport",
+      acc: { l:'#0e7c86', li:'#0a626a', d:'#46c5cf', di:'#74d3db' }, motif: 'wave',
       city: "Newport", title: "Newport", tagline: "A coastal day among the Gilded Age",
       pin: 3, coords: [41.4901, -71.3128],
       drive: { from: "Providence", to: "Newport", miles: "35 mi", time: "about 45 min" },
@@ -146,6 +151,7 @@ window.TRIP = {
 
     {
       n: 5, date: "Jul 2", dateLong: "Thursday, July 2", dow: "Thu", art: "newhaven",
+      acc: { l:'#00356b', li:'#00356b', d:'#6ba6e0', di:'#8ebce8' }, motif: 'tower',
       city: "New Haven", title: "New Haven", tagline: "Yale, and the pizza capital of America",
       pin: 4, coords: [41.3163, -72.9223],
       drive: { from: "Newport", to: "New Haven", miles: "125 mi", time: "about 2 hr 15 min" },
@@ -170,6 +176,7 @@ window.TRIP = {
 
     {
       n: 6, date: "Jul 3", dateLong: "Friday, July 3", dow: "Fri", art: "princeton",
+      acc: { l:'#e77500', li:'#9c4d00', d:'#ff9e3d', di:'#ffb468' }, motif: 'tiger',
       city: "Princeton", title: "Princeton", tagline: "Nassau Hall and the orange bubble",
       pin: 5, coords: [40.3487, -74.6593],
       drive: { from: "New Haven", to: "Princeton", miles: "120 mi", time: "about 2 hr 15 min" },
@@ -194,6 +201,7 @@ window.TRIP = {
 
     {
       n: 7, date: "Jul 4", dateLong: "Saturday, July 4", dow: "Sat", art: "philly",
+      acc: { l:'#b31942', li:'#a3173b', d:'#ff5366', di:'#ff8597' }, motif: 'stars',
       city: "Philadelphia", title: "Philadelphia, Independence Day", tagline: "The birthplace, on the 250th Fourth",
       pin: 6, coords: [39.9489, -75.1500], feature: true,
       drive: { from: "Princeton", to: "Philadelphia", miles: "45 mi", time: "about 1 hr" },
@@ -205,7 +213,7 @@ window.TRIP = {
         ["Note", "Steps from Penn, an ideal base for the program drop-off."]
       ],
       sights: [
-        { name: "Independence Hall", wiki: "Independence_Hall", q: "Independence Hall, 520 Chestnut St, Philadelphia, PA", star: "book timed tickets", blurb: "The room where both the Declaration (1776) and the Constitution (1787) were signed. Free, but timed tickets vanish fast for July 4 weekend. Reserve on recreation.gov the moment they open." },
+        { name: "Independence Hall", wiki: "Independence_Hall", q: "Independence Hall, 520 Chestnut St, Philadelphia, PA", star: "free, no ticket Jul 1 to 4", blurb: "The room where both the Declaration (1776) and the Constitution (1787) were signed. Free, and over the holiday (July 1 to 4, 2026) no timed ticket is needed, so you can just walk up. Go early to get ahead of the crowds and security lines." },
         { name: "The Liberty Bell", wiki: "Liberty_Bell", q: "Liberty Bell Center, 526 Market St, Philadelphia, PA", blurb: "Across the street, free, no ticket. Go early to beat the holiday crowds." },
         { name: "First Bank of the United States", wiki: "First_Bank_of_the_United_States", q: "First Bank of the United States, 116 S 3rd St, Philadelphia, PA", star: "new for 2026", blurb: "Reopening to the public for the first time in about 50 years on July 1, 2026, with new exhibits on Hamilton and the nation's first financial system." },
         { name: "Museum of the American Revolution", wiki: "Museum_of_the_American_Revolution", q: "Museum of the American Revolution, 101 S 3rd St, Philadelphia, PA", blurb: "The best single museum for the full story. Washington's actual field tent is the centerpiece." }
@@ -222,6 +230,7 @@ window.TRIP = {
 
     {
       n: 8, date: "Jul 5", dateLong: "Sunday, July 5", dow: "Sun", art: "penn",
+      acc: { l:'#990000', li:'#8f0000', d:'#ec5a6e', di:'#f2899a' }, motif: 'crest',
       city: "Philadelphia", title: "Penn Drop-Off", tagline: "Alrisha begins, program starts Jul 5",
       pin: null, coords: [39.9522, -75.1932],
       hotel: { name: "Sheraton Philadelphia University City", addr: "3549 Chestnut St, Philadelphia, PA 19104", parking: "On-site", nights: "night 2 of 2", q: "Sheraton Philadelphia University City Hotel, 3549 Chestnut St, Philadelphia, PA 19104" },
@@ -243,6 +252,7 @@ window.TRIP = {
 
     {
       n: 9, date: "Jul 6", dateLong: "Monday, July 6", dow: "Mon", art: "home",
+      acc: { l:'#2b6cb0', li:'#1e5a96', d:'#74b0e8', di:'#97c6ef' }, motif: 'plane',
       city: "Home", title: "Fly Home", tagline: "PHL to SFO, party of three",
       pin: null, coords: [39.8729, -75.2437],
       hotel: null,

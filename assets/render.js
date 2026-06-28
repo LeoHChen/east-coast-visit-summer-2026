@@ -13,6 +13,25 @@
   function homeHref(h){ return root() + 'index.html' + (h||''); }
   function journalHref(h){ return root() + 'journal.html' + (h||''); }
 
+  /* per-page accent (city / university color), theme-aware. Set before paint and
+     re-applied on theme toggle by app.js via window.applyDayAccent. */
+  function resolvedThemeR(){
+    var a = document.documentElement.getAttribute('data-theme');
+    if(!a){ try{ a = localStorage.getItem('theme'); }catch(e){} }
+    if(a) return a;
+    return (window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
+  }
+  function applyAccent(acc){
+    acc = acc || T.meta.acc;
+    window.__acc = acc;
+    var dark = resolvedThemeR()==='dark';
+    var s = document.documentElement.style;
+    s.setProperty('--accent', dark ? acc.d : acc.l);
+    s.setProperty('--accent-ink', dark ? acc.di : acc.li);
+  }
+  window.applyDayAccent = function(){ applyAccent(window.__acc || T.meta.acc); };
+  function watermark(motif){ return '<div class="watermark" aria-hidden="true">' + (WATERMARK[motif] || WATERMARK.stars) + '</div>'; }
+
   /* ---------- small utility icons (functional glyphs) ---------- */
   var IC = {
     pin:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="2.6"/></svg>',
@@ -168,9 +187,10 @@
   /* ---------- page: DAY ---------- */
   window.renderDay = function(n){
     var d = days[n-1];
+    applyAccent(d.acc);
     mount('day');
     document.title = 'Day '+n+'. '+d.title+' . The Northeast Circuit';
-    var cover = '<header class="cover"><div class="wrap"><div class="daycover enter">'+
+    var cover = '<header class="cover">'+watermark(d.motif)+'<div class="wrap"><div class="daycover enter">'+
       '<div>'+
         '<div class="stamp"><div class="dno">'+d.n+'</div>'+
         '<div class="dmeta">'+d.dateLong+'<br>'+d.city+'</div></div>'+
@@ -186,12 +206,13 @@
 
   /* ---------- page: HOME ---------- */
   window.renderHome = function(){
+    applyAccent(T.meta.acc);
     mount('home');
     var m = T.meta;
     var metaCells = [['Dates',m.dates.replace(', 2026','')],['Route',m.route],['Driving',m.driveTotal],['Travelers',m.travelers]]
       .map(function(c){ return '<div><div class="dmeta">'+c[0]+'</div><div class="hn" style="font-family:var(--serif)">'+c[1]+'</div></div>'; }).join('');
 
-    var hero = '<header class="cover"><div class="wrap">'+
+    var hero = '<header class="cover">'+watermark(m.motif)+'<div class="wrap">'+
       '<div class="enter">'+
         '<p class="kicker">Chen Family Expedition . America\'s Semiquincentennial</p>'+
         '<h1 style="font-size:clamp(2.6rem,7vw,5rem);margin:14px 0 6px">'+m.title+'</h1>'+
@@ -241,6 +262,7 @@
 
   /* ---------- page: JOURNAL ---------- */
   window.renderJournal = function(){
+    applyAccent(T.meta.acc);
     mount('journal');
     var feed = days.map(function(d){
       return '<a class="feeditem" href="'+dayHref(d.n)+'#album" data-turn>'+
@@ -248,7 +270,7 @@
         '<div><div class="ft">Day '+d.n+'. '+d.title+'</div></div>'+
         '<div class="fc">'+d.city+'</div></a>';
     }).join('');
-    var hero = '<header class="cover"><div class="wrap narrow enter">'+
+    var hero = '<header class="cover">'+watermark(T.meta.motif)+'<div class="wrap narrow enter">'+
       '<p class="kicker">The trip blog</p>'+
       '<h1 style="font-size:clamp(2.4rem,6vw,4rem);margin:14px 0 10px">Journal &amp; Photos</h1>'+
       '<p class="lede">As the family adds photos and notes, every day fills in here. Pick a day to read its journal, or open a day page to post your own. '+
@@ -369,4 +391,20 @@
     )
   };
   function art(key){ return ART[key] || ART.hero; }
+
+  /* watermark motifs: simple original silhouettes hinting at each place.
+     fill = currentColor (the page accent); shown large and faint behind the cover. */
+  var STAR = 'M0,-1 L0.2245,-0.309 L0.951,-0.309 L0.363,0.118 L0.588,0.809 L0,0.382 L-0.588,0.809 L-0.363,0.118 L-0.951,-0.309 L-0.2245,-0.309 Z';
+  function wm(inner){ return '<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">'+inner+'</svg>'; }
+  var WATERMARK = {
+    stars: wm('<path d="'+STAR+'" transform="translate(56,40) scale(33)"/><path d="'+STAR+'" transform="translate(22,66) scale(16)"/><path d="'+STAR+'" transform="translate(83,72) scale(12)"/>'),
+    shield: wm('<path d="M50,6 L90,18 V50 C90,76 72,90 50,97 C28,90 10,76 10,50 V18 Z"/>'),
+    crest: wm('<path d="M50,6 L90,18 V50 C90,76 72,90 50,97 C28,90 10,76 10,50 V18 Z"/><rect x="10" y="41" width="80" height="12" fill="var(--bg)"/>'),
+    book: wm('<path d="M50,28 C40,21 22,21 10,25 V80 C22,76 40,76 50,82 C60,76 78,76 90,80 V25 C78,21 60,21 50,28 Z"/><rect x="48" y="28" width="4" height="54" fill="var(--bg)"/>'),
+    wave: wm('<g fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round"><path d="M4,34 q16,-15 32,0 t32,0 t32,0"/><path d="M4,56 q16,-15 32,0 t32,0 t32,0"/><path d="M4,78 q16,-15 32,0 t32,0 t32,0"/></g>'),
+    tower: wm('<path d="M40,94 V34 H38 V28 H42 V24 H46 V20 H50 L54,20 V24 H58 V28 H62 V34 H60 V94 Z"/>'),
+    tiger: wm('<g transform="rotate(18 50 50)"><rect x="20" y="6" width="9" height="88" rx="4"/><rect x="38" y="2" width="11" height="96" rx="5"/><rect x="58" y="6" width="9" height="88" rx="4"/><rect x="74" y="10" width="7" height="80" rx="3"/></g>'),
+    plane: wm('<path d="M6,54 L94,14 L54,92 L46,60 Z"/><path d="M46,60 L94,14" fill="none" stroke="var(--bg)" stroke-width="3"/>'),
+    ship: wm('<path d="M48,14 L48,62 L18,62 Z"/><path d="M54,26 L54,62 L82,62 Z"/><path d="M18,66 H84 L74,82 H28 Z"/>')
+  };
 })();
