@@ -69,16 +69,21 @@ GitHub Discussions. Nothing secret is committed. Do this once:
 5. Commit and push. Until this is done, the section shows a friendly "setup
    pending" note instead of a broken widget.
 
-## Publishing on GitHub Pages
+## Publishing
 
-1. Push this repo to GitHub.
-2. On GitHub: **Settings → Pages**.
-3. Under **Build and deployment → Source**, choose **Deploy from a branch**.
-4. Select branch **`main`** and folder **`/ (root)`**, then **Save**.
-5. After a minute or two the site is live at:
-   `https://leohchen.github.io/east-coast-visit-summer-2026/`
+The site deploys automatically via GitHub Actions (`.github/workflows/static.yml`)
+on every push to `main`.
 
-The `.nojekyll` file tells Pages to serve the files as-is (no Jekyll build).
+- **Live:** <https://ec2026.haochen.net> (custom domain; the root `CNAME` file points Pages at it)
+- DNS: a Cloudflare `CNAME` record `ec2026` to `leohchen.github.io` (DNS only / grey cloud)
+- Underlying Pages URL: `https://leohchen.github.io/east-coast-visit-summer-2026/`
+
+The `.nojekyll` file tells Pages to serve files as-is (no Jekyll build).
+
+**Cache note:** CSS and JS are referenced with a `?v=N` query (for example
+`assets/styles.css?v=3`). GitHub Pages caches assets for about 10 minutes, so
+when you change a CSS or JS file, bump that number in the HTML files and visitors
+get the new version immediately instead of a stale cached one.
 
 ---
 
