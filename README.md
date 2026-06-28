@@ -1,28 +1,75 @@
-# The Northeast Circuit · Summer 2026
+# The Northeast Circuit . Summer 2026
 
-A one-page itinerary for the Chen family's nine-day Northeast road trip,
-**June 28 – July 6, 2026** — six college towns (Harvard, MIT, Brown, RISD, Yale,
-Princeton, Penn) plus a Newport coastal day, timed to land in Philadelphia for
-the **250th Fourth of July** (America's Semiquincentennial) before dropping
-Alrisha at the Penn summer program.
+A family **trip album and journal** for the Chen family's nine-day Northeast road
+trip, **June 28 to July 6, 2026**. Six college towns (Harvard, MIT, Brown, RISD,
+Yale, Princeton, Penn) plus a Newport coastal day, timed to land in Philadelphia
+for the **250th Fourth of July** before dropping Alrisha at the Penn summer
+program.
 
-## What's inside
+The plan lives here now. As the trip happens, the family adds photos and journal
+entries to each day, and the site becomes the trip blog.
 
-- **Flights** — UA 2356 (SFO→BOS) out, UA 2661 (PHL→SFO) home
-- **Day-by-day** — hotels, drive times, and the running order
-- **Sightseeing** — why each stop is worth it, with the date/time-locked 250th events flagged
-- **Food** — one dinner pick per night (local-authentic + an American/Asian alternate), ~$50/person
-- **Shows & tickets** — what to book, and when
-- **Before you go** — the holiday-weekend gotchas
+## How it is built
 
-## Viewing it
+Static site, **no build step**, served by GitHub Pages.
 
-The site is a single static `index.html` — open it directly, or view the
-published version via **GitHub Pages**.
+```
+index.html            Home: hero, day index, flights, interactive route map, before-you-go
+days/day-1..9.html    One page per day (plan + sights + food + photos/journal)
+journal.html          The blog feed: links to every day's journal
+assets/trip.js        Single source of truth (all itinerary content + links)
+assets/render.js      Builds each page from trip.js
+assets/app.js         Theme toggle, scroll reveal, Leaflet map, Giscus loader
+assets/styles.css     Theme, layout, animations
+sitemap.xml           Static sitemap
+```
 
-### Publishing on GitHub Pages
+To edit the itinerary, change **`assets/trip.js`** in one place; every page
+updates. Each site links to its Google Maps location and a Wikipedia article.
 
-1. Push this repo to GitHub (see below).
+### Run it locally
+
+The pages load data over `fetch`/scripts and the map needs HTTP, so use a local
+server rather than opening the file directly:
+
+```sh
+python3 -m http.server 8000
+# then open http://localhost:8000/
+```
+
+### Features
+
+- **Page-turn animation** between days (View Transitions API, with a reduced-motion fallback).
+- **Light and dark mode** (follows the system; toggle in the top right).
+- **Interactive route map** (Leaflet + OpenStreetMap/CARTO tiles, no API key) with numbered pins and a leg-by-leg distance table (about 375 mi, 7.5 hr total).
+- **Photos and journal per day** via Giscus (see setup below).
+
+## Adding photos and journals (the family)
+
+Each day page has a **Photos and journal** section. Sign in there with your
+GitHub account, then write an entry or drag in photos. Posts are saved to GitHub
+(as a Discussion for that day; photos upload to GitHub) and appear on the page
+right away. The journal page lists every day's entries in one place.
+
+## One-time Giscus setup (trip owner)
+
+Photos and journals run on [Giscus](https://giscus.app), which stores entries in
+GitHub Discussions. Nothing secret is committed. Do this once:
+
+1. **Enable Discussions:** repo **Settings → General → Features →** check **Discussions**.
+2. **Install the Giscus app:** visit <https://github.com/apps/giscus> → **Install** → select this repo.
+3. **Get the IDs:** go to <https://giscus.app>, enter the repo
+   `LeoHChen/east-coast-visit-summer-2026`, choose **mapping: pathname** and a
+   Discussions **Category** (for example *General* or *Announcements*). The page
+   shows a `data-repo-id` and `data-category-id`.
+4. **Paste them in** `assets/app.js`, in the `GISCUS` config block at the top:
+   set `repoId`, `category`, and `categoryId`. These IDs are public and safe to commit.
+5. Commit and push. Until this is done, the section shows a friendly "setup
+   pending" note instead of a broken widget.
+
+## Publishing on GitHub Pages
+
+1. Push this repo to GitHub.
 2. On GitHub: **Settings → Pages**.
 3. Under **Build and deployment → Source**, choose **Deploy from a branch**.
 4. Select branch **`main`** and folder **`/ (root)`**, then **Save**.
@@ -33,5 +80,5 @@ The `.nojekyll` file tells Pages to serve the files as-is (no Jekyll build).
 
 ---
 
-*Built as a shareable family itinerary. Dates, hotels, and confirmation numbers
-reflect the confirmed bookings as of June 2026.*
+*A shareable family keepsake. Dates, hotels, and confirmation numbers reflect the
+confirmed bookings as of June 2026.*

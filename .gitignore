@@ -1,0 +1,5 @@
+# Tooling artifacts, not part of the published site
+.agents/
+.claude/
+.DS_Store
+skills-lock.json
