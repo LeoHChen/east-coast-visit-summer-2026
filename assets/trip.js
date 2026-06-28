@@ -46,7 +46,7 @@ window.TRIP = {
     car: "Avis Standard SUV, confirmation 13843363US2. Pick up at BOS on Jun 28 (about 7:30 PM after landing), return to PHL the evening of Jul 5.",
     notes: [
       { t: "The Jul 6 flight is 6:00 AM.", d: "That means leaving for PHL around 4:15 AM. Either book a PHL airport hotel for the last night, or set two alarms and pre-arrange a 4 AM rideshare. Return the rental car the evening of Jul 5 so you are not dealing with it pre-dawn." },
-      { t: "Independence Hall is free over the holiday, no reservation needed.", d: "From July 1 to 4, 2026 no timed ticket is required, so you can just walk up. Go early in the day to get ahead of the crowds and the security screening around Independence Mall." },
+      { t: "Independence Hall is free over the holiday, no reservation needed.", d: "From July 1 to 4, 2026 no timed ticket is required, so you can just walk up. Go early in the day to get ahead of the crowds and the security screening around Independence Mall. If you end up visiting on July 5, timed tickets resume, so reserve one on recreation.gov." },
       { t: "Expect road closures in Philadelphia on the 4th.", d: "Old City and the Ben Franklin Parkway close for the parade, ceremony, and fireworks. Driving in from Princeton, leave early and be ready to park once and walk." },
       { t: "Most campus tours run weekdays only.", d: "The schedule already lands Harvard, MIT, Brown, RISD, Yale and Princeton on Mon to Fri, but confirm and reserve each official tour in advance, as summer slots fill." },
       { t: "Two nights will run above the $50 per person dinner target.", d: "Newport (resort town) and Jul 4 in Philadelphia are the splurge nights. The alternates listed for those stops keep things closer to budget." },
@@ -78,6 +78,10 @@ window.TRIP = {
     {
       n: 2, date: "Jun 29", dateLong: "Monday, June 29", dow: "Mon", art: "boston",
       acc: { l:'#a51c30', li:'#9c1a2d', d:'#f0586e', di:'#f58a9a' }, motif: 'shield',
+      tours: [
+        { school: "Harvard", url: "https://apply.college.harvard.edu/portal/explore_harvard?tab=campus-visit", note: "Info session plus a student-led tour. Groups are capped at 3, so book two registrations for four people. Tour slots release weekly on Fridays." },
+        { school: "MIT", url: "https://apply.mitadmissions.org/portal/visitmit", note: "Reserve ahead, no walk-ins. Runs Monday to Friday; if your date is not listed yet it opens about a month out." }
+      ],
       city: "Cambridge", title: "Harvard and MIT", tagline: "Two campuses, ten minutes apart",
       pin: null, coords: [42.3736, -71.1097],
       hotel: { name: "Sheraton Commander", addr: "16 Garden St, Cambridge, MA 02138", parking: "Valet $45/day", nights: "night 2 of 2", q: "Sheraton Commander, 16 Garden St, Cambridge, MA 02138" },
@@ -102,6 +106,10 @@ window.TRIP = {
     {
       n: 3, date: "Jun 30", dateLong: "Tuesday, June 30", dow: "Tue", art: "providence",
       acc: { l:'#8a3324', li:'#7c2e20', d:'#df8b70', di:'#e7a48c' }, motif: 'book',
+      tours: [
+        { school: "Brown", url: "https://apply.college.brown.edu/portal/campus-visit", note: "Pre-register; groups are capped at 3, so book two registrations for four. Check in at the Henderson Welcome Center, 21 Prospect St." },
+        { school: "RISD", url: "https://admissions.risd.edu/portal/undergrad-events", note: "Register through the Undergraduate Events portal. The admissions house is next door to Brown, easy to pair on the same day." }
+      ],
       city: "Providence", title: "Providence", tagline: "Brown and RISD on College Hill",
       pin: 2, coords: [41.8268, -71.4025],
       drive: { from: "Cambridge", to: "Providence", miles: "50 mi", time: "about 1 hr" },
@@ -152,6 +160,9 @@ window.TRIP = {
     {
       n: 5, date: "Jul 2", dateLong: "Thursday, July 2", dow: "Thu", art: "newhaven",
       acc: { l:'#00356b', li:'#00356b', d:'#6ba6e0', di:'#8ebce8' }, motif: 'tower',
+      tours: [
+        { school: "Yale", url: "https://apps.admissions.yale.edu/portal/visit", note: "Register for the campus tour or info session. This is the day before the holiday, so confirm the slot; a no-registration self-guided audio tour is a good backup." }
+      ],
       city: "New Haven", title: "New Haven", tagline: "Yale, and the pizza capital of America",
       pin: 4, coords: [41.3163, -72.9223],
       drive: { from: "Newport", to: "New Haven", miles: "125 mi", time: "about 2 hr 15 min" },
@@ -177,6 +188,9 @@ window.TRIP = {
     {
       n: 6, date: "Jul 3", dateLong: "Friday, July 3", dow: "Fri", art: "princeton",
       acc: { l:'#e77500', li:'#9c4d00', d:'#ff9e3d', di:'#ffb468' }, motif: 'tiger',
+      tours: [
+        { school: "Princeton", url: "https://apply.princeton.edu/portal/orange_key_tour", note: "Register for the Orange Key tour. July 3 may fall on the observed holiday closure, so confirm a slot exists; the campus grounds and Nassau Hall are walkable regardless." }
+      ],
       city: "Princeton", title: "Princeton", tagline: "Nassau Hall and the orange bubble",
       pin: 5, coords: [40.3487, -74.6593],
       drive: { from: "New Haven", to: "Princeton", miles: "120 mi", time: "about 2 hr 15 min" },
@@ -231,6 +245,9 @@ window.TRIP = {
     {
       n: 8, date: "Jul 5", dateLong: "Sunday, July 5", dow: "Sun", art: "penn",
       acc: { l:'#990000', li:'#8f0000', d:'#ec5a6e', di:'#f2899a' }, motif: 'crest',
+      tours: [
+        { school: "Penn", url: "https://key.admissions.upenn.edu/portal/campus-visit", note: "July 5 is a Sunday with no guided tour, so use the year-round self-guided campus tour for drop-off, or book a separate weekday guided slot." }
+      ],
       city: "Philadelphia", title: "Penn Drop-Off", tagline: "Alrisha begins, program starts Jul 5",
       pin: null, coords: [39.9522, -75.1932],
       hotel: { name: "Sheraton Philadelphia University City", addr: "3549 Chestnut St, Philadelphia, PA 19104", parking: "On-site", nights: "night 2 of 2", q: "Sheraton Philadelphia University City Hotel, 3549 Chestnut St, Philadelphia, PA 19104" },

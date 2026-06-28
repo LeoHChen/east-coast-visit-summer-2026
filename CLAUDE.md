@@ -83,7 +83,7 @@ The current `index.html` has six sections that should survive the redesign:
 - **Newport:** Cliff Walk; The Breakers (buy timed tour); colonial Newport (1763 Touro Synagogue).
 - **New Haven:** Yale Old Campus + Sterling Library; Yale University Art Gallery (free); Wooster St apizza.
 - **Princeton:** Nassau Hall (was U.S. Capitol for 4 months in 1783); University Chapel + Art Museum (reopened 2025); Princeton Battlefield.
-- **Philadelphia:** Independence Hall (free but **timed tickets — book on recreation.gov the day they open**); Liberty Bell; First Bank of the U.S. (reopening to public Jul 1, 2026); Museum of the American Revolution; UPenn + Wharton (Locust Walk, Penn Museum — Alrisha's summer home).
+- **Philadelphia:** Independence Hall (free; **no timed ticket needed Jul 1-4, 2026 — just walk up**; timed tickets via recreation.gov resume from Jul 5, so reserve only if visiting on Jul 5); Liberty Bell; First Bank of the U.S. (reopening to public Jul 1, 2026); Museum of the American Revolution; UPenn + Wharton (Locust Walk, Penn Museum — Alrisha's summer home).
 
 ### Time-locked 250th events (must be on-spot, on-time)
 - **Jul 4 evening:** Wawa Welcome America **"Party on the Parkway"** — free concert + fireworks over the Art Museum (Rocky steps). The place to be in the U.S. on July 4, 2026.
@@ -99,7 +99,7 @@ The current `index.html` has six sections that should survive the redesign:
 
 ### Reminders ("Before You Go")
 1. Jul 6 flight is 6:00 AM → leave for PHL ~4:15 AM; book a PHL airport hotel for the last night OR pre-arrange a 4 AM rideshare; return the SUV on Jul 5.
-2. Book Independence Hall timed tickets the day they open (recreation.gov).
+2. Independence Hall is free and needs **no reservation Jul 1-4, 2026** — just walk up, go early for crowds + security. Timed tickets resume Jul 5; book on recreation.gov only if visiting that day.
 3. Expect Philadelphia road closures on Jul 4; leave Princeton early, park once.
 4. Most campus tours run weekdays only — already scheduled Mon–Fri; reserve each.
 5. Newport and Jul 4 Philly dinners will run above $50pp — use the alternates to save.

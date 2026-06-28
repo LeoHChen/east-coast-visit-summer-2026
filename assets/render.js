@@ -132,6 +132,19 @@
       '<div class="sights">'+items+'</div></div></section>';
   }
 
+  function toursBlock(d){
+    if(!d.tours || !d.tours.length) return '';
+    var items = d.tours.map(function(t){
+      return '<div class="book reveal"><div class="bk-school">'+t.school+
+        '<a class="btn btn-ghost bk-go" target="_blank" rel="noopener" href="'+t.url+'">Register</a></div>'+
+        '<div class="bk-note">'+t.note+'</div></div>';
+    }).join('');
+    return '<section class="section"><div class="wrap narrow">'+
+      '<div class="sec-head reveal"><h2>Reserve a campus tour</h2>'+
+      '<p class="lede">Official tours are free but need advance registration, and summer slots fill. Book these now.</p></div>'+
+      items+'</div></section>';
+  }
+
   function timedBlock(d){
     if(!d.timed || !d.timed.length) return '';
     var items = d.timed.map(function(t){
@@ -200,7 +213,7 @@
       '<div class="cover-art">'+art(d.art)+'</div>'+
       '</div></div></header>';
     var main = document.getElementById('day');
-    main.innerHTML = cover + planBlock(d) + sightsBlock(d) + timedBlock(d) + foodBlock(d) + albumBlock(d) + turnNav(d);
+    main.innerHTML = cover + planBlock(d) + sightsBlock(d) + toursBlock(d) + timedBlock(d) + foodBlock(d) + albumBlock(d) + turnNav(d);
     revealFallback();
   };
 

@@ -247,6 +247,16 @@ h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.04;letter-spacin
 }
 .sight .sd{color:var(--ink-soft);font-size:1.02rem}
 
+/* ---------- reserve a tour ---------- */
+.book{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:var(--r);
+  background:var(--surface);box-shadow:var(--shadow);padding:17px 20px}
+.book + .book{margin-top:14px}
+.book .bk-school{font-family:var(--serif);font-weight:600;font-size:1.25rem;
+  display:flex;align-items:center;gap:14px}
+.book .bk-go{margin-left:auto;padding:8px 18px;font-size:.78rem;flex:none}
+.book .bk-note{color:var(--ink-soft);font-size:.98rem;margin-top:7px;max-width:62ch}
+@media(max-width:600px){ .book .bk-school{flex-wrap:wrap;gap:8px} .book .bk-go{margin-left:0} }
+
 /* ---------- time-locked ---------- */
 .timed{
   border:1px solid var(--accent);background:var(--accent-wash);border-radius:var(--r);
