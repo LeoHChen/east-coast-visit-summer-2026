@@ -25,19 +25,31 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
-      - name: Build photos.json
+      - name: Build and commit photos.json
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
-        run: node scripts/extract-photos.mjs
-      - name: Commit if changed
         run: |
-          if [[ -n "$(git status --porcelain assets/photos.json)" ]]; then
-            git config user.name "github-actions[bot]"
-            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          # Regenerate against the latest main each attempt so concurrent syncs
+          # (rapid discussion events fire overlapping runs) never lose to a push
+          # race — the loser just rebuilds on the winner's commit and retries.
+          for attempt in 1 2 3 4 5; do
+            git fetch --quiet origin main
+            git reset --hard --quiet origin/main
+            node scripts/extract-photos.mjs
+            if [[ -z "$(git status --porcelain assets/photos.json)" ]]; then
+              echo "No photo changes."; exit 0
+            fi
             git add assets/photos.json
-            git commit -m "chore: sync trip photos"
-            git push
-          else
-            echo "No photo changes."
-          fi
+            git commit --quiet -m "chore: sync trip photos"
+            if git push origin HEAD:main; then
+              echo "Pushed on attempt ${attempt}."; exit 0
+            fi
+            echo "Push rejected by a concurrent sync; rebuilding against latest main..."
+            sleep $(( (RANDOM % 4) + 1 ))
+          done
+          # Exhausted retries: another concurrent run already pushed the latest
+          # state, so this is not a real failure — exit clean to avoid noise.
+          echo "Yielded to a concurrent sync after 5 attempts."; exit 0
