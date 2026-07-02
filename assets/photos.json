@@ -1,3 +1,40 @@
 {
-  "days": {}
+  "days": {
+    "day-1": {
+      "discussionUrl": "https://github.com/LeoHChen/east-coast-visit-summer-2026/discussions/7",
+      "photos": []
+    },
+    "day-2": {
+      "discussionUrl": "https://github.com/LeoHChen/east-coast-visit-summer-2026/discussions/8",
+      "photos": []
+    },
+    "day-3": {
+      "discussionUrl": "https://github.com/LeoHChen/east-coast-visit-summer-2026/discussions/9",
+      "photos": []
+    },
+    "day-4": {
+      "discussionUrl": "https://github.com/LeoHChen/east-coast-visit-summer-2026/discussions/10",
+      "photos": []
+    },
+    "day-5": {
+      "discussionUrl": "https://github.com/LeoHChen/east-coast-visit-summer-2026/discussions/11",
+      "photos": []
+    },
+    "day-6": {
+      "discussionUrl": "https://github.com/LeoHChen/east-coast-visit-summer-2026/discussions/12",
+      "photos": []
+    },
+    "day-7": {
+      "discussionUrl": "https://github.com/LeoHChen/east-coast-visit-summer-2026/discussions/13",
+      "photos": []
+    },
+    "day-8": {
+      "discussionUrl": "https://github.com/LeoHChen/east-coast-visit-summer-2026/discussions/14",
+      "photos": []
+    },
+    "day-9": {
+      "discussionUrl": "https://github.com/LeoHChen/east-coast-visit-summer-2026/discussions/15",
+      "photos": []
+    }
+  }
 }
