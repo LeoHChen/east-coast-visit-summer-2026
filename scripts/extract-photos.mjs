@@ -9,16 +9,18 @@ const DRY = argv.includes('--dry-run');
 const fxIdx = argv.indexOf('--fixture');
 const FIXTURE = fxIdx > -1 ? argv[fxIdx + 1] : process.env.FIXTURE;
 
+// Keep the nested first: counts small — GitHub caps a query at 500,000 possible
+// nodes (discussions * comments * replies), so 20*100*20 = 40,000 stays well under.
 const QUERY = `query($owner:String!,$name:String!,$cursor:String){
   repository(owner:$owner,name:$name){
-    discussions(first:50,after:$cursor){
+    discussions(first:20,after:$cursor){
       pageInfo{ hasNextPage endCursor }
       nodes{
         number title url body createdAt
         author{ login avatarUrl }
         comments(first:100){ nodes{
           body url createdAt author{ login avatarUrl }
-          replies(first:100){ nodes{ body url createdAt author{ login avatarUrl } } }
+          replies(first:20){ nodes{ body url createdAt author{ login avatarUrl } } }
         } }
       }
     }
