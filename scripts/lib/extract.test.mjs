@@ -2,11 +2,25 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { dayKeyFromTitle, extractImages, buildDays } from './extract.mjs';
 
-test('dayKeyFromTitle parses giscus pathname titles', () => {
-  assert.equal(dayKeyFromTitle('/days/day-4.html'), 'day-4');
+test('dayKeyFromTitle parses giscus-normalized and raw pathname titles', () => {
+  assert.equal(dayKeyFromTitle('days/day-4'), 'day-4');        // giscus-normalized form (real)
+  assert.equal(dayKeyFromTitle('/days/day-4.html'), 'day-4');  // raw pathname form
   assert.equal(dayKeyFromTitle('days/day-12.html'), 'day-12');
   assert.equal(dayKeyFromTitle('/index.html'), null);
   assert.equal(dayKeyFromTitle(''), null);
+});
+
+test('buildDays merges duplicate day discussions; oldest number is canonical url', () => {
+  const discussions = [
+    { number: 5, title: 'days/day-4', url: 'u5', author: { login: 'b' },
+      createdAt: '2026-07-02T02:10:00Z', body: '', comments: { nodes: [] } },
+    { number: 4, title: 'days/day-4', url: 'u4', author: { login: 'a' },
+      createdAt: '2026-07-02T02:08:00Z',
+      body: '![p](https://github.com/user-attachments/assets/x)', comments: { nodes: [] } },
+  ];
+  const days = buildDays(discussions);
+  assert.equal(days['day-4'].discussionUrl, 'u4'); // oldest (#4) wins even though #5 came first in the array
+  assert.equal(days['day-4'].photos.length, 1);
 });
 
 test('extractImages pulls markdown + html image urls on github hosts only', () => {

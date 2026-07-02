@@ -5,7 +5,10 @@ const IMG_OK = /(?:user-attachments\/assets\/|githubusercontent\.com\/|\.(?:png|
 
 export function dayKeyFromTitle(title) {
   if (typeof title !== 'string') return null;
-  const m = title.trim().match(/^\/?days\/day-(\d+)\.html$/i);
+  // Giscus (mapping: pathname) normalizes /days/day-4.html -> days/day-4 (it strips
+  // the leading slash and .html). Match that canonical form, and also tolerate the
+  // raw /days/day-4.html shape for robustness.
+  const m = title.trim().match(/^\/?days\/day-(\d+)(?:\.html)?$/i);
   return m ? 'day-' + Number(m[1]) : null;
 }
 
@@ -46,7 +49,11 @@ function photosFromSource(src) {
 
 export function buildDays(discussions) {
   const days = {};
-  for (const d of discussions || []) {
+  // Process oldest-first (by discussion number) so that when a day has duplicate
+  // discussions (Giscus race), the oldest one — the one Giscus binds to — becomes
+  // the canonical discussionUrl, and photos from all duplicates still merge in.
+  const byNumber = [...(discussions || [])].sort((a, b) => (a.number || 0) - (b.number || 0));
+  for (const d of byNumber) {
     const key = dayKeyFromTitle(d.title);
     if (!key) continue;
     const sources = [{ body: d.body, url: d.url, author: d.author, createdAt: d.createdAt }];
