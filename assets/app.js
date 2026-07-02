@@ -143,8 +143,104 @@
     });
   }
 
+  /* ---------- photo gallery ---------- */
+  function galleryRoot(){ return (document.body.dataset.root || ''); }
+  function currentDayKey(){
+    var n = document.body.dataset.day;
+    return (n && n !== '0') ? 'day-' + n : null;
+  }
+
+  function loadGallery(){
+    var box = document.getElementById('day-gallery');
+    var key = currentDayKey();
+    if(!box || !key) return;
+    fetch(galleryRoot() + 'assets/photos.json?ts=' + Date.now(), { cache: 'no-store' })
+      .then(function(r){ return r.ok ? r.json() : { days: {} }; })
+      .catch(function(){ return { days: {} }; })
+      .then(function(data){
+        var day = (data && data.days && data.days[key]) || null;
+        var cta = document.getElementById('addPhotos');
+        if(cta && day && day.discussionUrl) cta.href = day.discussionUrl;
+        renderGallery(box, (day && day.photos) || []);
+      });
+  }
+
+  // Build the grid with DOM methods (never innerHTML): url/alt/author come from
+  // public discussion comments and must not be treated as HTML.
+  function renderGallery(box, photos){
+    box.textContent = '';
+    if(!photos.length){
+      box.className = 'gallery is-empty';
+      var msg = document.createElement('p');
+      msg.className = 'gallery-empty';
+      msg.textContent = 'No photos yet for this day. Be the first — tap “Add your photos”.';
+      box.appendChild(msg);
+      return;
+    }
+    box.className = 'gallery';
+    photos.forEach(function(p, i){
+      var who = p.author ? ' by ' + p.author : '';
+      var btn = document.createElement('button');
+      btn.className = 'shot'; btn.type = 'button';
+      btn.dataset.i = i;
+      btn.setAttribute('aria-label', 'Open photo' + who);
+      var img = document.createElement('img');
+      img.loading = 'lazy';
+      img.src = p.url;                 // property assignment — not HTML-parsed
+      img.alt = p.alt || ('Trip photo' + who);
+      btn.appendChild(img);
+      if(p.author){
+        var by = document.createElement('span');
+        by.className = 'shot-by';
+        by.textContent = p.author;
+        btn.appendChild(by);
+      }
+      box.appendChild(btn);
+    });
+    wireLightbox(box, photos);
+  }
+
+  function wireLightbox(box, photos){
+    var idx = 0, lb = null;
+    function build(){
+      lb = document.createElement('div');
+      lb.className = 'lightbox'; lb.hidden = true;
+      lb.setAttribute('role','dialog'); lb.setAttribute('aria-modal','true'); lb.setAttribute('aria-label','Photo viewer');
+      lb.innerHTML =
+        '<button class="lb-close" type="button" aria-label="Close">&#215;</button>'+
+        '<button class="lb-nav lb-prev" type="button" aria-label="Previous photo">&#8249;</button>'+
+        '<figure class="lb-fig"><img alt=""><figcaption></figcaption></figure>'+
+        '<button class="lb-nav lb-next" type="button" aria-label="Next photo">&#8250;</button>';
+      document.body.appendChild(lb);
+      lb.querySelector('.lb-close').addEventListener('click', close);
+      lb.querySelector('.lb-prev').addEventListener('click', function(){ show(idx-1); });
+      lb.querySelector('.lb-next').addEventListener('click', function(){ show(idx+1); });
+      lb.addEventListener('click', function(e){ if(e.target === lb) close(); });
+    }
+    function show(i){
+      if(!lb) build();
+      idx = (i + photos.length) % photos.length;
+      var p = photos[idx];
+      var img = lb.querySelector('img'); img.src = p.url; img.alt = p.alt || 'Trip photo';
+      lb.querySelector('figcaption').textContent = p.author ? 'Posted by ' + p.author : '';
+      lb.hidden = false; document.documentElement.style.overflow = 'hidden';
+      lb.querySelector('.lb-close').focus();
+    }
+    function close(){ if(lb){ lb.hidden = true; document.documentElement.style.overflow = ''; } }
+    document.addEventListener('keydown', function(e){
+      if(!lb || lb.hidden) return;
+      if(e.key === 'Escape') close();
+      else if(e.key === 'ArrowLeft') show(idx-1);
+      else if(e.key === 'ArrowRight') show(idx+1);
+      else if(e.key === 'Tab'){ e.preventDefault(); lb.querySelector('.lb-close').focus(); }
+    });
+    box.querySelectorAll('.shot').forEach(function(btn){
+      btn.addEventListener('click', function(){ show(Number(btn.dataset.i)); });
+    });
+  }
+
   /* ---------- boot ---------- */
-  function boot(){ window.__appReady = true; wireToggle(); wireReveal(); loadGiscus(); initMap(); }
+  function boot(){ window.__appReady = true; wireToggle(); wireReveal(); loadGiscus(); initMap(); loadGallery(); }
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', boot);
   else boot();
 })();

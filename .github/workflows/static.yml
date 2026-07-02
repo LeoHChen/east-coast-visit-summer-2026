@@ -6,6 +6,12 @@ on:
   push:
     branches: ["main"]
 
+  # Redeploy after the photo-sync Action commits a new photos.json
+  # (commits pushed by GITHUB_TOKEN do not retrigger the push event above)
+  workflow_run:
+    workflows: ["Sync trip photos"]
+    types: [completed]
+
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 

@@ -1,0 +1,22 @@
+[
+  {
+    "number": 4,
+    "title": "/days/day-4.html",
+    "url": "https://github.com/LeoHChen/east-coast-visit-summer-2026/discussions/4",
+    "body": "![Cliff Walk](https://picsum.photos/seed/cliff/900/700.jpg)",
+    "createdAt": "2026-07-01T18:00:00Z",
+    "author": { "login": "leo", "avatarUrl": "https://picsum.photos/seed/leo/40/40.jpg" },
+    "comments": { "nodes": [
+      { "body": "The Breakers ![breakers](https://picsum.photos/seed/breakers/800/1000.jpg)",
+        "url": "https://github.com/LeoHChen/east-coast-visit-summer-2026/discussions/4#c1",
+        "createdAt": "2026-07-01T19:30:00Z",
+        "author": { "login": "alrisha", "avatarUrl": "https://picsum.photos/seed/al/40/40.jpg" },
+        "replies": { "nodes": [
+          { "body": "sunset <img src=\"https://picsum.photos/seed/sunset/1000/650.jpg\" alt=\"harbor sunset\">",
+            "url": "https://github.com/LeoHChen/east-coast-visit-summer-2026/discussions/4#r1",
+            "createdAt": "2026-07-01T21:00:00Z",
+            "author": { "login": "mom", "avatarUrl": "https://picsum.photos/seed/mom/40/40.jpg" } }
+        ] } }
+    ] }
+  }
+]

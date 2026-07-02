@@ -1,0 +1,43 @@
+name: Sync trip photos
+
+on:
+  discussion:
+    types: [created, edited, deleted, category_changed]
+  discussion_comment:
+    types: [created, edited, deleted]
+  workflow_dispatch:
+  schedule:
+    - cron: '*/30 * * * *'   # backstop for any missed webhook
+
+permissions:
+  contents: write
+  discussions: read
+
+concurrency:
+  group: photos-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Build photos.json
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: node scripts/extract-photos.mjs
+      - name: Commit if changed
+        run: |
+          if [[ -n "$(git status --porcelain assets/photos.json)" ]]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add assets/photos.json
+            git commit -m "chore: sync trip photos"
+            git push
+          else
+            echo "No photo changes."
+          fi

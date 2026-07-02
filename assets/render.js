@@ -175,10 +175,14 @@
     var discUrl = 'https://github.com/' + (window.TRIP.meta.repo || 'LeoHChen/east-coast-visit-summer-2026') + '/discussions';
     return '<section class="section lg" id="album"><div class="wrap narrow">'+
       '<div class="sec-head reveal"><h2>Photos and journal</h2>'+
-      '<p class="lede">This is where the real trip lands. '+T.meta.family.join(', ')+' can sign in with GitHub below and write about Day '+d.n+' in '+d.city+'. Everything is saved to this trip on GitHub.</p></div>'+
+      '<p class="lede">This is where the real trip lands. '+T.meta.family.join(', ')+' can add photos and write about Day '+d.n+' in '+d.city+'. Everything is saved to this trip on GitHub.</p></div>'+
+      '<div class="gallery-block reveal">'+
+        '<div class="gallery is-empty" id="day-gallery" aria-live="polite"><p class="gallery-empty">Loading photos&#8230;</p></div>'+
+        '<a class="addphotos" id="addPhotos" href="'+discUrl+'" target="_blank" rel="noopener">'+IC.cam+'<span>Add your photos</span></a>'+
+      '</div>'+
       '<div class="howto reveal">'+
-        '<div class="howto-row"><span class="howto-n">1</span><div><b>Write a journal entry.</b> Sign in with GitHub in the box below and post. It appears here right away, saved as a GitHub discussion for this day.</div></div>'+
-        '<div class="howto-row"><span class="howto-n">2</span><div><b>Add photos.</b> The box below is text only, so to post pictures, open this day\'s thread on GitHub and drag your photos into the comment box there (or paste an image link). They show up here automatically. <a href="'+discUrl+'" target="_blank" rel="noopener">Open the discussions on GitHub</a></div></div>'+
+        '<div class="howto-row"><span class="howto-n">1</span><div><b>Add photos.</b> Tap <b>Add your photos</b> to open this day\'s thread on GitHub, then drag or choose photos in the comment box. They show up in the gallery above within a couple of minutes.</div></div>'+
+        '<div class="howto-row"><span class="howto-n">2</span><div><b>Write a journal entry.</b> Sign in with GitHub in the box below and post. It appears right away, saved as this day\'s discussion.</div></div>'+
       '</div>'+
       '<div class="giscus-wrap reveal"><div class="giscus"></div></div>'+
       '</div></section>';
